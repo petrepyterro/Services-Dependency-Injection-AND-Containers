@@ -22,9 +22,7 @@ class ShipLoader{
    * @return Ship
    */
   public function findOneById($id) {
-    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $statement = $pdo->prepare('SELECT * FROM ship WHERE id = :id');
+    $statement = $this->getPDO()->prepare('SELECT * FROM ship WHERE id = :id');
     $statement->execute(array('id' => $id));
     $shipArray = $statement->fetch(PDO::FETCH_ASSOC);
     
@@ -36,9 +34,7 @@ class ShipLoader{
   }
   
   private function queryForShips(){
-    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $statement = $pdo->prepare('SELECT * FROM ship');
+    $statement = $this->getPDO()->prepare('SELECT * FROM ship');
     $statement->execute();
     $shipsArray = $statement->fetchAll(PDO::FETCH_ASSOC);
     
@@ -53,6 +49,16 @@ class ShipLoader{
     $ship->setStrength($shipData['strength']);
     
     return $ship;
+  }
+  
+  /**
+   * @return PDO
+   */
+  private function getPDO() {
+    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    return $pdo;
   }
   
 }
