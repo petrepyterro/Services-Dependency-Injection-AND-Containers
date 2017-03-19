@@ -6,14 +6,8 @@ class ShipLoader{
     
     $ships = array();
     
-    foreach ($shipsData as $shipData){
-      $ship = new Ship($shipData['name']);
-      $ship->setId($shipData['id']);
-      $ship->setWeaponPower($shipData['weapon_power']);
-      $ship->setJediFactor($shipData['jedi_factor']);
-      $ship->setStrength($shipData['strength']);
-      
-      $ships[] = $ship;
+    foreach ($shipsData as $shipData){  
+      $ships[] = $this->createShipFromData($shipData);
     }
     
     return $ships;
@@ -26,7 +20,11 @@ class ShipLoader{
     $statement->execute(array('id' => $id));
     $shipArray = $statement->fetch(PDO::FETCH_ASSOC);
     
-    var_dump($shipArray);die();
+    if(!$shipArray){
+      return null;
+    }
+    
+    return $this->createShipFromData($shipArray);
   }
   
   private function queryForShips(){
@@ -37,6 +35,16 @@ class ShipLoader{
     $shipsArray = $statement->fetchAll(PDO::FETCH_ASSOC);
     
     return $shipsArray;
+  }
+  
+  private function createShipFromData(array $shipData) {
+    $ship = new Ship($shipData['name']);
+    $ship->setId($shipData['id']);
+    $ship->setWeaponPower($shipData['weapon_power']);
+    $ship->setJediFactor($shipData['jedi_factor']);
+    $ship->setStrength($shipData['strength']);
+    
+    return $ship;
   }
   
 }
