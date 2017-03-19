@@ -10,4 +10,25 @@ class BattleResult{
     $this->winningShip = $winningShip;
     $this->losingShip = $losingShip;
   }
+  
+  /**
+   * @return boolean
+   */
+  public function getUsedJediPowers(){
+    return $this->usedJediPowers;
+  }
+  
+  /**
+   * @return Ship
+   */
+  public function getWinningShip(){
+    return $this->winningShip;
+  }
+  
+  /**
+   * @return Ship
+   */
+  public function getLosingShip(){
+    return $this->losingShip;
+  }
 }
