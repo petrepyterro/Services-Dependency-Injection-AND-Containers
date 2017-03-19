@@ -36,6 +36,7 @@ class BattleManager{
     //update the strength on the ships, so we can show this
     $ship1->setStrength($ship1Health);
     $ship2->setStrength($ship2Health);
+    var_dump($ship1->getStrength());var_dump($ship2->getStrength());die();
 
     if ($ship1Health <= 0 && $ship2Health <= 0) {
       // they destroyed each other
