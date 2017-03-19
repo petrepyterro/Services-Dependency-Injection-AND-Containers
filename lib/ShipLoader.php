@@ -1,6 +1,10 @@
 <?php
 
 class ShipLoader{
+  /**
+   * 
+   * @return Ship[]
+   */
   function getShips(){
     $shipsData = $this->queryForShips();
     
@@ -13,6 +17,10 @@ class ShipLoader{
     return $ships;
   }
   
+  /*
+   * @param $id
+   * @return Ship
+   */
   public function findOneById($id) {
     $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
