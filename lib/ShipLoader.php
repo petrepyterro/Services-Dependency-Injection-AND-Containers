@@ -19,6 +19,16 @@ class ShipLoader{
     return $ships;
   }
   
+  public function findOneById($id) {
+    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $statement = $pdo->prepare('SELECT * FROM ship WHERE id = :id');
+    $statement->execute(array('id' => $id));
+    $shipArray = $statement->fetch(PDO::FETCH_ASSOC);
+    
+    var_dump($shipArray);die();
+  }
+  
   private function queryForShips(){
     $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -28,5 +38,6 @@ class ShipLoader{
     
     return $shipsArray;
   }
+  
 }
 
