@@ -2,12 +2,9 @@
 
 class ShipLoader{
   function getShips(){
-    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $statement = $pdo->prepare('SELECT * FROM ship');
-    $statement->execute();
-    $shipsArray = $statement->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($shipsArray);die();
+    $shipsData = $this->queryForShips();
+    var_dump($shipsData);die();
+    
     $ships = array();
 
     $ship = new Ship('Jedi Starfighter');
@@ -36,6 +33,16 @@ class ShipLoader{
     $ships['rz1_a_wing_interceptor'] = $ship4;
 
     return $ships;
+  }
+  
+  private function queryForShips(){
+    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $statement = $pdo->prepare('SELECT * FROM ship');
+    $statement->execute();
+    $shipsArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $shipsArray;
   }
 }
 
