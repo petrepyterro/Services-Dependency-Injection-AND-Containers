@@ -2,6 +2,12 @@
 
 class ShipLoader{
   function getShips(){
+    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $statement = $pdo->prepare('SELECT * FROM ship');
+    $statement->execute();
+    $shipsArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($shipsArray);die();
     $ships = array();
 
     $ship = new Ship('Jedi Starfighter');
