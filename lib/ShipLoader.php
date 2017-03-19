@@ -1,6 +1,7 @@
 <?php
 
 class ShipLoader{
+  private $pdo;
   /**
    * 
    * @return Ship[]
@@ -55,10 +56,11 @@ class ShipLoader{
    * @return PDO
    */
   private function getPDO() {
-    $pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    return $pdo;
+    if ($this->pdo === null){
+      $this->pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
+      $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    return $this->pdo;
   }
   
 }
