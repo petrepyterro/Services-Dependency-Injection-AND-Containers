@@ -14,7 +14,7 @@ class BattleResult{
   /**
    * @return boolean
    */
-  public function getUsedJediPowers(){
+  public function wereUsedJediPowers(){
     return $this->usedJediPowers;
   }
   
