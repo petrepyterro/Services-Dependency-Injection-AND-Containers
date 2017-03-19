@@ -8,6 +8,7 @@ class ShipLoader{
     
     foreach ($shipsData as $shipData){
       $ship = new Ship($shipData['name']);
+      $ship->setId($shipData['id']);
       $ship->setWeaponPower($shipData['weapon_power']);
       $ship->setJediFactor($shipData['jedi_factor']);
       $ship->setStrength($shipData['strength']);
