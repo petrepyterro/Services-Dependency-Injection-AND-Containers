@@ -2,6 +2,15 @@
 
 class ShipLoader{
   private $pdo;
+  private $dbDsn;
+  private $dbUser;
+  private $dbPass;
+  
+  public function __construct($dbDsn, $dbUser, $dbPass) {
+    $this->dbDsn = $dbDsn;
+    $this->dbUser = $dbUser;
+    $this->dbPass = $dbPass;
+  }
   /**
    * 
    * @return Ship[]
@@ -57,7 +66,7 @@ class ShipLoader{
    */
   private function getPDO() {
     if ($this->pdo === null){
-      $this->pdo = new PDO('mysql:host=localhost;dbname=Services_Dependency_Injection_AND_Containers','root', 'mysql');
+      $this->pdo = new PDO($this->dbDsn, $this->dbUser, $this->dbPass);
       $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return $this->pdo;
